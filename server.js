@@ -19,6 +19,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 
+
+
+app.use('/users', require('./routes/usersRoutes'))
+
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => console.log(`server running on port ${PORT}`))

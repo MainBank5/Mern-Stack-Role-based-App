@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const noteSchema = new Schema({
-    username: { 
+    user: { 
         type: mongoose.Schema.Types.ObjectId,  //datatype is an objectid from a schema 
         required: true,
         ref: 'User'
