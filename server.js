@@ -21,7 +21,8 @@ app.use(cookieParser());
 
 
 
-app.use('/users', require('./routes/usersRoutes'))
+app.use('/users', require('./routes/usersRoutes'));
+app.use('/notes', require('./routes/noteRoutes'));
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');

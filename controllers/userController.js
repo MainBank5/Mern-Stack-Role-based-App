@@ -49,7 +49,7 @@ const createNewUser = asyncHandler( async (req, res) => {
 const updateUser = asyncHandler( async (req, res) => {
     const {id, username, active, password, roles} = req.body;
     //confirm data 
-    if(!id || !username || !password || !Array.isArray(roles) || roles.length ||
+    if(!id || !username || !Array.isArray(roles) || !roles.length ||
    typeof active !== 'boolean' ) {
     return res.status(400).json({message:"All fields are required!"})
    }
@@ -76,7 +76,7 @@ const updateUser = asyncHandler( async (req, res) => {
 
     const updatedUser = await user.save()
 
-    res.json({message:`${updatedUser.username} successfully udated!`})
+    res.json({message:`${updatedUser.username} successfully updated!`})
 });
 
 //@desc delete user
@@ -86,16 +86,16 @@ const deleteUser = asyncHandler( async (req, res) => {
 
     if(!id) return res.status(400).json({message:"User ID required"})
     //if the user has notes assigned dont delete the user 
-    const notes = await Note.findOne({user:id}).lean().exec()
+    const note = await Note.findOne({user:id}).lean().exec()
 
-    if(notes?.length) {return res.status(400).json({message: "User has notes assigned, cannot delete user"})}
+    if(note) {return res.status(400).json({message: "User has notes assigned, cannot delete user"})}
     
     const user = await User.findById(id).exec();
 
     if(!user) {return res.status(400).json({message:"User not found"})}
     
     const result = await User.deleteOne({ _id:id });
-    const reply = `Username ${result.username} with ID ${result._id} deleted!`
+    const reply = `Username ${result.username} with ID ${id} deleted!`
 
     res.json({reply})
 });
