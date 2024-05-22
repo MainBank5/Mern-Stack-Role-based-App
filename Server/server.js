@@ -23,7 +23,6 @@ app.use(cookieParser());
 
 app.use('/register', require('./routes/registerRoute'));
 app.use('/login', require('./routes/authRoute'));
-app.use('/refresh', require('./routes/refreshRoute'))
 app.use('/logout', require('./routes/logoutRoute'));
 
 app.use(verifyAccess);

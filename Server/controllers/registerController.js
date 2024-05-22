@@ -22,7 +22,7 @@ const register = asyncHandler( async (req, res) => {
 
     const user = await User.create(userObject)
     if(user) {
-        res.status(201).json({ message: 'Account created successfully' })
+        res.status(201).json({ message: 'User created successfully' })
     } else {
         res.status(400).json({ message: 'Invalid user data' })
     }
