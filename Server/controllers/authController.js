@@ -43,8 +43,11 @@ const handleLogin = asyncHandler( async (req, res,) => {
        const result = await foundUser.save();
        console.log(result);
 
+       const {password:pass, ...userInfo } = result  //._doc
+       console.log(userInfo)
+
        res.cookie('jwt', refreshToken, {httpOnly:true, maxAge:24 * 60 * 60 * 1000});
-       res.json({accessToken});
+       res.json({accessToken, roles, userInfo});
     } else {
         res.status(400).json({ "message": "Invalid username or password!" });
     }
