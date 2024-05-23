@@ -21,9 +21,11 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-app.use('/register', require('./routes/registerRoute'));
-app.use('/login', require('./routes/authRoute'));
-app.use('/logout', require('./routes/logoutRoute'));
+app.use('/api/register', require('./routes/registerRoute'));
+app.use('/api/login', require('./routes/authRoute'));
+app.use('/api/refresh', require('./routes/refreshRoute'));
+app.use('/api/logout', require('./routes/logoutRoute'));
+
 
 app.use(verifyAccess);
 app.use('/employees', require('./routes/employeesRoutes'));

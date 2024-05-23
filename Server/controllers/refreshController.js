@@ -19,7 +19,7 @@ const handlerefreshToken = asyncHandler( async (req, res,) => {
         (error, decode) => {
             if(error || foundUser.username !== decode.username) return res.sendStatus(403);
             const roles = Object.values(foundUser.roles);
-
+            const {rest, ...password} = foundUser
             const accessToken = jwt.sign(
                 {"userInfo":{
                     "username":decode.username,
@@ -28,7 +28,7 @@ const handlerefreshToken = asyncHandler( async (req, res,) => {
                 process.env.ACCESS_TOKEN_SECRET,
                 {expiresIn:'40m'}
             )
-            res.json(accessToken, roles)
+            res.json(accessToken, roles, rest)
         }
     )
 
